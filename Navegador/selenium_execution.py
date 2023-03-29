@@ -121,7 +121,6 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
     num_arrecadacaof = "%017d" % num_arrecadacao
     obsf = "%017d" % obs
 
-
     # Clique BTN novo
     try:
         WebDriverWait(navegador, 25).until(
