@@ -26,7 +26,7 @@ def service_navegador():
 navegador = webdriver.Chrome(options=option_navegador(),service=service_navegador())
 
 acessa_sior(navegador)
-login(navegador,'04278152159','Trabalho@2021')
+login(navegador,'','')  # Passe aqui o Login e Senha do SIOR
 acessa_tela_incial_auto_pagamento(navegador)
 
 table = pd.read_excel('tables/registros.xlsx')
