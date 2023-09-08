@@ -1,5 +1,4 @@
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 import pandas as pd
 
@@ -19,14 +18,14 @@ def option_navegador():
 
 
 def service_navegador():
-    serv = Service(ChromeDriverManager().install())
+    serv = Service()
     return serv
 
 
-navegador = webdriver.Chrome(options=option_navegador(),service=service_navegador())
+navegador = webdriver.Edge()
 
 acessa_sior(navegador)
-login(navegador,'','')  # Passe aqui o Login e Senha do SIOR
+login(navegador)
 acessa_tela_incial_auto_pagamento(navegador)
 
 table = pd.read_excel('tables/registros.xlsx')

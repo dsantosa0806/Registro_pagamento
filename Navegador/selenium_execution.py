@@ -21,33 +21,23 @@ def acessa_sior(navegador):
         sys.exit()
 
 
-def login(navegador,usuario,senha):
-    username = usuario
-    userpass = senha
-    cpfpath = '// *[ @ id = "UserName"]'
-    senhapath = '//*[@id="Password"]'
-    clickpath = '//*[@id="FormLogin"]/div[4]/div[2]/button'
-    err = True
-    while err:
-        try:
-            WebDriverWait(navegador, 15).until(
-                EC.presence_of_element_located(
-                    (By.XPATH, cpfpath))).send_keys(username)
-            WebDriverWait(navegador, 15).until(
-                EC.presence_of_element_located(
-                    (By.XPATH, senhapath))).send_keys(userpass)
-            WebDriverWait(navegador, 15).until(
-                EC.element_to_be_clickable(
-                    (By.XPATH, clickpath))).click()
+def login(navegador):
+    path_btn_entrar_gov = '//*[@id="placeholder"]/div[1]/div/div/div/div/div/div/form/div[2]/button'
+    qr_code_path = '//*[@id="login-cpf"]/div[4]/a'
+    logado = '//*[@id="center-pane"]/div/div/div[1]/div[2]'
 
-            time.sleep(2)
-
-            err = False
-
-        except TimeoutException:
-            print('Erro', 'O SIOR apresentou instabilidade, '
-                          'por favor reinicie a aplicação e tente novamente T:Login')
-            sys.exit()
+    try:
+        WebDriverWait(navegador, 15).until(
+            EC.presence_of_element_located(
+                (By.XPATH, path_btn_entrar_gov))).click()
+        WebDriverWait(navegador, 15).until(
+            EC.presence_of_element_located(
+                (By.XPATH, qr_code_path))).click()
+        WebDriverWait(navegador, 120).until(
+            EC.presence_of_element_located(
+                (By.XPATH, logado))).is_displayed()
+    except:
+        return 1
 
 
 def validate_login_error(navegador):
@@ -119,7 +109,7 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
 
     data_pagf = datetime.strftime(data_pag, "%d/%m/%Y")
     num_arrecadacaof = "%017d" % num_arrecadacao
-    obsf = "%017d" % obs
+    obsf = str(obs)
 
     # Clique BTN novo
     try:
@@ -147,7 +137,7 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
 
     # Consultar Ait
     try:
-        WebDriverWait(navegador, 25).until(
+        WebDriverWait(navegador, 10).until(
             EC.element_to_be_clickable((By.XPATH, btn_consultar))).click()
     except TimeoutException:
         print(f'Erro {auto}', 'Btn Consultar')
@@ -156,9 +146,9 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
     #  Ait Visible
     try:
 
-        if WebDriverWait(navegador, 25).until(
+        if WebDriverWait(navegador, 10).until(
                 EC.element_to_be_clickable((By.XPATH, ait_visivel))).is_displayed():
-            WebDriverWait(navegador, 25).until(
+            WebDriverWait(navegador, 10).until(
                 EC.element_to_be_clickable((By.XPATH, master_row))).click()
     except TimeoutException:
         print(f'Erro {auto}', 'Master Row')
