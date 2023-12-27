@@ -23,7 +23,7 @@ def acessa_sior(navegador):
 
 def login(navegador):
     path_btn_entrar_gov = '//*[@id="placeholder"]/div[1]/div/div/div/div/div/div/form/div[2]/button'
-    qr_code_path = '//*[@id="login-cpf"]/div[4]/a'
+    qr_code_path = '//*[@id="login-cpf"]/div[5]/a'
     logado = '//*[@id="center-pane"]/div/div/div[1]/div[2]'
 
     try:
@@ -84,7 +84,7 @@ def acessa_tela_incial_auto(navegador):
 
 def acessa_tela_incial_auto_pagamento(navegador):
     # Acessa a tela da notificação da autuação
-    url_base = 'https://servicos.dnit.gov.br/sior/Cobranca/ENACPagamento'
+    url_base = 'https://servicos.dnit.gov.br/sior/Cobranca/CCOBEPagamento'
     try:
         navegador.get(url_base)
     except ValueError:
@@ -100,7 +100,7 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
     input_data = '//*[@id="DataPagamento"]'
     input_num_arrec = '//*[@id="NumeroDocumentoArrecadacao"]'
     input_obs = '//*[@id="Observacao"]'
-    btn_pesquisa_ait = '//*[@id="formENACPagamento"]/fieldset/div[1]/div[1]/div[2]/button'
+    btn_pesquisa_ait = '//*[@id="formCCOBEPagamento"]/fieldset/div[1]/div[1]/div[2]/button'
     input_ait = '//*[@id="NumeroAutoPesquisa"]'
     btn_consultar = '/html/body/div[13]/div[2]/div[1]/div/div[1]/button'
     ait_visivel = '//*[@id="gridInfracao"]/table/tbody/tr/td[1]/a'

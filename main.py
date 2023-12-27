@@ -1,7 +1,6 @@
 from selenium.webdriver.chrome.service import Service
-from selenium import webdriver
+import undetected_chromedriver as webdriver
 import pandas as pd
-
 from Navegador.selenium_execution import acessa_sior, login, acessa_tela_incial_auto_pagamento, registra
 
 
@@ -14,6 +13,8 @@ def option_navegador():
     options.add_argument("--dns-prefetch-disable")
     options.add_argument("--disable-gpu")
     options.add_argument("--disable-infobars")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("--use_subprocess")
     return options
 
 
@@ -22,7 +23,7 @@ def service_navegador():
     return serv
 
 
-navegador = webdriver.Edge()
+navegador = webdriver.Chrome(options=option_navegador())
 
 acessa_sior(navegador)
 login(navegador)
