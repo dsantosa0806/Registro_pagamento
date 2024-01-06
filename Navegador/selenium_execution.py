@@ -1,7 +1,6 @@
 import sys
 import time
 from datetime import datetime
-from bs4 import BeautifulSoup
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -116,7 +115,7 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
         WebDriverWait(navegador, 25).until(
             EC.element_to_be_clickable((By.XPATH, btn_novo))).click()
     except TimeoutException:
-        print(f'Erro {auto}', 'Btn Novo')
+        print(f'Erro ao abrir form {auto}', 'Tente registrar novamente')
         return 1
 
     # Pesquisa Ait
@@ -124,7 +123,7 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
         WebDriverWait(navegador, 25).until(
             EC.element_to_be_clickable((By.XPATH, btn_pesquisa_ait))).click()
     except TimeoutException:
-        print(f'Erro {auto}', 'Btn Ait')
+        print(f'Erro ao pesquisar {auto}', 'Tente registrar novamente')
         return 1
 
     # Input Ait
@@ -132,7 +131,7 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
         WebDriverWait(navegador, 25).until(
             EC.element_to_be_clickable((By.XPATH, input_ait))).send_keys(auto)
     except TimeoutException:
-        print(f'Erro {auto}', 'Input Ait')
+        print(f'Erro input auto {auto}', 'Tente registrar novamente')
         return 1
 
     # Consultar Ait
@@ -140,7 +139,7 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
         WebDriverWait(navegador, 10).until(
             EC.element_to_be_clickable((By.XPATH, btn_consultar))).click()
     except TimeoutException:
-        print(f'Erro {auto}', 'Btn Consultar')
+        print(f'Erro ao consultar {auto}', 'Tente registrar novamente')
         return 1
 
     #  Ait Visible
@@ -151,7 +150,7 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
             WebDriverWait(navegador, 10).until(
                 EC.element_to_be_clickable((By.XPATH, master_row))).click()
     except TimeoutException:
-        print(f'Erro {auto}', 'Master Row')
+        print(f'Não registrado {auto}', 'Auto não disponível para registro')
         return 1
 
     #  Devedor Visible e input elements
@@ -165,7 +164,7 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
             WebDriverWait(navegador, 25).until(
                 EC.element_to_be_clickable((By.XPATH, input_obs))).send_keys(obsf)
     except TimeoutException:
-        print(f'Erro {auto}', 'Input elementos')
+        print(f'Erro input dados {auto}', 'Tente registrar novamente')
         return 1
 
     #  Devedor Visible e input elements
@@ -173,7 +172,7 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
         WebDriverWait(navegador, 25).until(
             EC.element_to_be_clickable((By.XPATH, btn_salvar))).click()
     except ElementClickInterceptedException:
-        print(f'Erro {auto}', 'Btn Salvar')
+        print(f'Erro ao salvar {auto}', 'Tente registrar novamente')
         return 1
 
     # Clique Consultar
@@ -182,6 +181,6 @@ def registra(navegador, auto, data_pag, num_arrecadacao, obs):
         WebDriverWait(navegador, 25).until(
             EC.element_to_be_clickable((By.XPATH, btn_consultar_inicial))).is_displayed()
     except TimeoutException:
-        print(f'Erro {auto}', 'Btn Consultar')
+        print(f'Erro ao consultar {auto}', 'Tente registrar novamente')
         return 1
 
